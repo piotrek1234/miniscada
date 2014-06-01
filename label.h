@@ -20,7 +20,7 @@ public:
     void setFont(QFont font);
     QFont getFont();
     void setGeometry(Geometry geometry);
-    Geometry getGeometry();
+    Geometry *getGeometry();
     void setIcon(Icon icon);
     Icon getIcon();
     void setOrientation(Orientation orientation);
@@ -31,7 +31,7 @@ public:
 private:
     QString text;
     QFont font;
-    Geometry geometry;
+    Geometry *geometry;
     Icon icon;
     Orientation orientation;
     QPixmap pixmap;

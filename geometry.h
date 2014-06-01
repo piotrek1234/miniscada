@@ -5,8 +5,10 @@ class Geometry
 {
 public:
     Geometry();
+    Geometry(const Geometry &geometry);
     Geometry(int x, int y, int width = -1, int height = -1);
     void setXY(int x, int y);
+    void setWH(int width, int height);
     int getX();
     int getY();
     void setWidth(int width);

@@ -2,13 +2,13 @@
 
 Label::Label()
 {
-
+    this->geometry = new Geometry(0, 0, 0, 0);
 }
 
 Label::Label(QString text, Geometry geometry, Icon icon, QFont font, Orientation orientation)
 {
     this->text = text;
-    this->geometry = geometry;
+    *(this->geometry) = geometry;
     this->icon = icon;
     this->font = font;
     this->orientation = orientation;
@@ -36,10 +36,11 @@ QFont Label::getFont()
 
 void Label::setGeometry(Geometry geometry)
 {
-    this->geometry = geometry;
+    delete this->geometry;
+    this->geometry = &geometry;
 }
 
-Geometry Label::getGeometry()
+Geometry* Label::getGeometry()
 {
     return this->geometry;
 }
@@ -75,17 +76,17 @@ QPixmap Label::draw()
     int textWidth = fm.width(this->text);
     int textHeight = fm.height();
 
-    int wys = this->icon.getGeometry().getHeight()>textHeight?this->icon.getGeometry().getHeight():textHeight;
+    int wys = this->icon.getGeometry()->getHeight()>textHeight?this->icon.getGeometry()->getHeight():textHeight;
 
-    this->setGeometry(Geometry(0, 0, 15+textWidth+this->icon.getGeometry().getWidth(), 10+wys));
+    this->setGeometry(Geometry(0, 0, 15+textWidth+this->icon.getGeometry()->getWidth(), 10+wys));
 
-    QPixmap temp(this->getGeometry().getWidth(), this->getGeometry().getHeight());
+    QPixmap temp(this->getGeometry()->getWidth(), this->getGeometry()->getHeight());
     QPainter p;
     p.begin(&temp);
     p.fillRect(0, 0, temp.width(), temp.height(), Qt::white);
     p.setFont(this->getFont());
-    p.fillRect(5, (this->getGeometry().getHeight()-this->icon.getGeometry().getHeight())/2, this->icon.getGeometry().getWidth(), this->icon.getGeometry().getWidth(), this->icon.getColor());
-    p.drawText(10+this->icon.getGeometry().getWidth(), (this->getGeometry().getHeight()+textHeight)/2-5, this->text);
+    p.fillRect(5, (this->getGeometry()->getHeight()-this->icon.getGeometry()->getHeight())/2, this->icon.getGeometry()->getWidth(), this->icon.getGeometry()->getWidth(), this->icon.getColor());
+    p.drawText(10+this->icon.getGeometry()->getWidth(), (this->getGeometry()->getHeight()+textHeight)/2-5, this->text);
 
     p.end();
 

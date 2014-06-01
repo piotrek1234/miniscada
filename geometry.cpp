@@ -2,6 +2,18 @@
 
 Geometry::Geometry()
 {
+    this->x = 0;
+    this->y = 0;
+    this->width = 0;
+    this->height = 0;
+}
+
+Geometry::Geometry(const Geometry &geometry)
+{
+    this->x = geometry.x;
+    this->y = geometry.y;
+    this->width = geometry.width;
+    this->height = geometry.height;
 }
 
 Geometry::Geometry(int x, int y, int width, int height)
@@ -16,6 +28,12 @@ void Geometry::setXY(int x, int y)
 {
     this->x = x;
     this->y = y;
+}
+
+void Geometry::setWH(int width, int height)
+{
+    this->width = width;
+    this->height = height;
 }
 
 int Geometry::getX()
