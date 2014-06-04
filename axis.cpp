@@ -236,7 +236,8 @@ QPixmap Axis::draw()
     }
 
     p.end();
-    this->setGeometry(Geometry(0, 0, temp.width(), temp.height()));
+    this->geometry.setWidth(temp.width());
+    this->geometry.setHeight(temp.height());
 
     return temp;
 }

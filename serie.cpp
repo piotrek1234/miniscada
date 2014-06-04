@@ -28,6 +28,8 @@ void Serie::setLength(int length)
 
 int Serie::getLength()
 {
+    if(points.size()<length)
+        return points.size();
     return this->length;
 }
 

@@ -30,12 +30,6 @@ void Geometry::setXY(int x, int y)
     this->y = y;
 }
 
-void Geometry::setWH(int width, int height)
-{
-    this->width = width;
-    this->height = height;
-}
-
 int Geometry::getX()
 {
     return this->x;

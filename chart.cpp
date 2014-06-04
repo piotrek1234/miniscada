@@ -17,13 +17,10 @@ QPixmap Chart::draw()
     {
         x+= this->getAxisY(i).draw().width();
     }
-    const int scale = double(this->getAxisY(0).getGeometry().getHeight()-20)/(this->getAxisY(0).getMax()-this->getAxisY(0).getMin());
+    const double scale = double(this->getAxisY(0).getGeometry().getHeight()-20)/(this->getAxisY(0).getMax()-this->getAxisY(0).getMin());
     for(int i=0; i<this->getSerie(0)->getLength()-1; i++)
     {
-        p.drawLine(x+i*20,\
-          y-scale*(this->getSerie(0)->getPoint(i)+this->getAxisY(0).getMin()),\
-          (i+1)*20+x,\
-          y-scale*(this->getSerie(0)->getPoint(i+1)+this->getAxisY(0).getMin()));
+        p.drawLine(x+i*20, y-scale*(this->getSerie(0)->getPoint(i)-this->getAxisY(0).getMin()), (i+1)*20+x, y-scale*(this->getSerie(0)->getPoint(i+1)-this->getAxisY(0).getMin()));
     }
 
     p.end();
@@ -32,12 +29,30 @@ QPixmap Chart::draw()
 
 void Chart::drawBackground()
 {
-    QPixmap temp(this->getGeometry().getWidth(), this->getGeometry().getHeight());
+    int width = 0, yWidth = 0;
+    for(int i=0; i<this->getAxisCount(); i++)
+    {
+        yWidth+= this->getAxisY(i).getGeometry().getWidth();
+    }
+    width += yWidth;
+    width -= this->getAxisY(this->getAxisCount()-1).getTickSize();
+    width += this->getAxisX().getGeometry().getWidth();
+    width += this->legend.getGeometry().getWidth();
+
+    int height = 0;
+    height += this->getAxisY(0).getGeometry().getHeight();
+    height += this->getAxisX().getGeometry().getHeight();
+
+    //QPixmap temp(this->getGeometry().getWidth(), this->getGeometry().getHeight());
+    QPixmap temp(width, height);
     QPainter p;
     p.begin(&temp);
-    p.fillRect(0, 0, temp.width(), temp.height(), Qt::yellow);
+    p.fillRect(0, 0, temp.width(), temp.height(), Qt::white);
+
+    p.drawPixmap(yWidth-11-this->getAxisY(0).getTickSize(), this->getAxisY(0).getGeometry().getHeight()-10, this->getAxisX().draw());
     p.drawPixmap(0, 0, this->getAxisY(0).draw());
-    p.drawPixmap(this->getAxisY(0).getGeometry().getWidth()-1-getAxisY(0).getTickSize(), this->getAxisY(0).getGeometry().getHeight()-10, this->getAxisX().draw());
+    p.drawPixmap(width-this->legend.getGeometry().getWidth(), 0, this->getLegend().draw());
+
     //p.drawPixmap();
 
     p.end();
