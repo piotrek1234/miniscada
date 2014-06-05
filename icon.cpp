@@ -21,7 +21,7 @@ void Icon::setGeometry(Geometry geometry)
     this->geometry = geometry;
 }
 
-Geometry Icon::getGeometry()
+Geometry &Icon::getGeometry()
 {
     return this->geometry;
 }

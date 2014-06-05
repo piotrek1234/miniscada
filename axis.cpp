@@ -10,7 +10,7 @@ void Axis::setLabel(Label label)
     this->label = label;
 }
 
-Label Axis::getLabel()
+Label &Axis::getLabel()
 {
     return this->label;
 }
@@ -20,7 +20,7 @@ void Axis::setLineStyle(LineStyle style)
     this->lineStyle = style;
 }
 
-LineStyle Axis::getLineStyle()
+LineStyle &Axis::getLineStyle()
 {
     return this->lineStyle;
 }
@@ -130,7 +130,7 @@ void Axis::setGeometry(Geometry geometry)
     this->geometry = geometry;
 }
 
-Geometry Axis::getGeometry()
+Geometry &Axis::getGeometry()
 {
     return this->geometry;
 }
@@ -143,7 +143,7 @@ QPixmap Axis::draw()
     int textWidth = fm.width(QString::number(this->max)+unit);
     int textHeight = fm.height();
     QPixmap temp;
-    int space;
+    float space;
 
     //najdluzszy tekst
     for(int i=1; i<=tickCount; i++)
@@ -182,7 +182,7 @@ QPixmap Axis::draw()
         for(int i=tickCount; i>=0; i--)
         {
             p.drawLine(textWidth+5, temp.height()-10-i*space, textWidth+5+tickSize, temp.height()-10-i*space);
-            p.drawText(0, temp.height()-10-i*space+textHeight/2, QString::number(min+tick*i)+unit);
+            p.drawText(0, temp.height()-10-i*space-textHeight/2, textWidth, textHeight, Qt::AlignRight, QString::number(min+tick*i)+unit);
         }
         p.drawLine(textWidth+5, 10, textWidth+5+tickSize, 10);
     }
@@ -198,7 +198,7 @@ QPixmap Axis::draw()
         for(int i=tickCount; i>=0; i--)
         {
             p.drawLine(1, temp.height()-10-i*space, 1+tickSize, temp.height()-10-i*space);
-            p.drawText(6+tickSize, temp.height()-10-i*space+textHeight/2, QString::number(min+tick*i)+unit);
+            p.drawText(6+tickSize, temp.height()-10-i*space-textHeight/2, textWidth, textHeight, Qt::AlignLeft, QString::number(min+tick*i)+unit);
         }
         p.drawLine(1, 10, 1+tickSize, 10);
     }

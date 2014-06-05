@@ -20,12 +20,12 @@ public:
     void setFont(QFont font);
     QFont getFont();
     void setGeometry(Geometry geometry);
-    Geometry getGeometry();
+    Geometry& getGeometry();
     void setIcon(Icon icon);
-    Icon getIcon();
+    Icon& getIcon();
     void setOrientation(Orientation orientation);
     Orientation getOrientation();
-    QPixmap getPixmap();
+    QPixmap& getPixmap();
     QPixmap draw();
     void refresh();
 private:

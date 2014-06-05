@@ -26,9 +26,9 @@ class Axis
 public:
     Axis();
     void setLabel(Label label);
-    Label getLabel();
+    Label &getLabel();
     void setLineStyle(LineStyle style);
-    LineStyle getLineStyle();
+    LineStyle& getLineStyle();
     void setTick(double tick);
     double getTick();
     void setAutoscale(bool autoscale);
@@ -50,7 +50,7 @@ public:
     void setUnit(QString unit);
     QString getUnit();
     void setGeometry(Geometry geometry);
-    Geometry getGeometry();
+    Geometry &getGeometry();
     QPixmap draw();
 private:
     Label label;

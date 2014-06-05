@@ -38,7 +38,7 @@ void Label::setGeometry(Geometry geometry)
     this->geometry = geometry;
 }
 
-Geometry Label::getGeometry()
+Geometry &Label::getGeometry()
 {
     return this->geometry;
 }
@@ -48,7 +48,7 @@ void Label::setIcon(Icon icon)
     this->icon = icon;
 }
 
-Icon Label::getIcon()
+Icon &Label::getIcon()
 {
     return this->icon;
 }
@@ -63,7 +63,7 @@ Orientation Label::getOrientation()
     return this->orientation;
 }
 
-QPixmap Label::getPixmap()
+QPixmap &Label::getPixmap()
 {
     return this->pixmap;
 }

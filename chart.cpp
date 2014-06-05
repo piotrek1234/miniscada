@@ -15,8 +15,11 @@ QPixmap Chart::draw()
     int y=this->getAxisY(0).getGeometry().getHeight()-10;
     for(int i=0; i<this->getAxisCount(); i++)
     {
-        x+= this->getAxisY(i).draw().width();
+        if(this->getAxisY(i).getPosition() == left)
+            x+= this->getAxisY(i).draw().width();
     }
+
+    //dla każdej serii czy tam osi
     const double scale = double(this->getAxisY(0).getGeometry().getHeight()-20)/(this->getAxisY(0).getMax()-this->getAxisY(0).getMin());
     for(int i=0; i<this->getSerie(0)->getLength()-1; i++)
     {
@@ -32,10 +35,15 @@ void Chart::drawBackground()
     int width = 0, yWidth = 0;
     for(int i=0; i<this->getAxisCount(); i++)
     {
-        yWidth+= this->getAxisY(i).getGeometry().getWidth();
+        this->getAxisY(i).draw();
+        if(this->getAxisY(i).getPosition() == left)
+            yWidth+= this->getAxisY(i).getGeometry().getWidth();
+        width += this->getAxisY(i).getGeometry().getWidth();
     }
-    width += yWidth;
+
+    //do poprawy:
     width -= this->getAxisY(this->getAxisCount()-1).getTickSize();
+
     width += this->getAxisX().getGeometry().getWidth();
     width += this->legend.getGeometry().getWidth();
 
@@ -49,8 +57,29 @@ void Chart::drawBackground()
     p.begin(&temp);
     p.fillRect(0, 0, temp.width(), temp.height(), Qt::white);
 
+    int prevWidth = 0;
+    //oś x
     p.drawPixmap(yWidth-11-this->getAxisY(0).getTickSize(), this->getAxisY(0).getGeometry().getHeight()-10, this->getAxisX().draw());
-    p.drawPixmap(0, 0, this->getAxisY(0).draw());
+    //lewe osie y
+    for(int i=0; i<this->getAxisCount(); i++)
+    {
+        if(this->getAxisY(i).getPosition() == left)
+        {
+            p.drawPixmap(prevWidth, 0, this->getAxisY(i).draw());
+            prevWidth+= this->getAxisY(i).getGeometry().getWidth();
+        }
+    }
+    //prawe osie y
+    prevWidth += this->getAxisX().getGeometry().getWidth()-20;
+    for(int i=0; i<this->getAxisCount(); i++)
+    {
+        if(this->getAxisY(i).getPosition() == right)
+        {
+            p.drawPixmap(prevWidth, 0, this->getAxisY(i).draw());
+            prevWidth+= this->getAxisY(i).getGeometry().getWidth();
+        }
+    }
+
     p.drawPixmap(width-this->legend.getGeometry().getWidth(), 0, this->getLegend().draw());
 
     //p.drawPixmap();
@@ -64,7 +93,7 @@ void Chart::setGeometry(Geometry geometry)
     this->geometry = geometry;
 }
 
-Geometry Chart::getGeometry()
+Geometry &Chart::getGeometry()
 {
     return this->geometry;
 }
@@ -89,7 +118,7 @@ void Chart::setLabel(Label label)
     this->label = label;
 }
 
-Label Chart::getLabel()
+Label &Chart::getLabel()
 {
     return this->label;
 }
@@ -119,7 +148,7 @@ void Chart::setLegend(Legend legend)
     this->legend = legend;
 }
 
-Legend Chart::getLegend()
+Legend &Chart::getLegend()
 {
     return this->legend;
 }
@@ -129,7 +158,7 @@ void Chart::setAxisX(Axis axis)
     this->axisX = axis;
 }
 
-Axis Chart::getAxisX()
+Axis &Chart::getAxisX()
 {
     return this->axisX;
 }
@@ -144,7 +173,7 @@ void Chart::removeAxisY(int id)
     axisY.erase(axisY.begin()+id);
 }
 
-Axis Chart::getAxisY(int id)
+Axis &Chart::getAxisY(int id)
 {
     return axisY.at(id);
 }

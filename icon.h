@@ -12,7 +12,7 @@ public:
     Icon(QColor color, Geometry geometry = Geometry(0, 0, 10, 10));
     Icon(Geometry geometry, QColor color);
     void setGeometry(Geometry geometry);
-    Geometry getGeometry();
+    Geometry &getGeometry();
     void setColor(QColor color);
     QColor getColor();
 private:
