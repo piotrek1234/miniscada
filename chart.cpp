@@ -23,6 +23,7 @@ QPixmap Chart::draw()
     const double scale = double(this->getAxisY(0).getGeometry().getHeight()-20)/(this->getAxisY(0).getMax()-this->getAxisY(0).getMin());
     for(int i=0; i<this->getSerie(0)->getLength()-1; i++)
     {
+        p.setPen(QPen(QBrush(this->getSerie(0)->getLineStyle().getColor()), this->getSerie(0)->getLineStyle().getWidth(), this->getSerie(0)->getLineStyle().getType()));
         p.drawLine(x+i*20, y-scale*(this->getSerie(0)->getPoint(i)-this->getAxisY(0).getMin()), (i+1)*20+x, y-scale*(this->getSerie(0)->getPoint(i+1)-this->getAxisY(0).getMin()));
     }
 

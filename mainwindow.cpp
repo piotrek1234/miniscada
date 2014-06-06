@@ -35,10 +35,10 @@ MainWindow::MainWindow(QWidget *parent) :
     leg.addLabel(Label("Etykieta 5", Geometry(0, 0, 0, 20), Icon(Qt::cyan)));
     leg.addLabel(Label("Etykieta 6", Geometry(0, 0, 0, 20), Icon(Qt::magenta)));*/
     Axis x;
-    x.setFont(QFont("arial", 10));
+    x.setFont(QFont("arial", 8));
     x.setTick(20);
     x.setTickDirection(inside);
-    x.setTickSize(5);
+    x.setTickSize(4);
     x.setMax(100);
     x.setMin(0);
     x.setPosition(bottom);
@@ -58,8 +58,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ch.setGeometry(Geometry(0, 0, 500, 500));
     ch.setLegend(leg);
 
+    LineStyle ls;
+    ls.setWidth(2);
+    ls.setColor(Qt::red);
+    ls.setType(Qt::DashLine);
+
     s = new Serie;
     s->setLength(20);
+    s->setLineStyle(ls);
     s->setTick(20);
     s->addPoint(0);
     s->addPoint(50);
@@ -80,14 +86,14 @@ MainWindow::~MainWindow()
 void MainWindow::on_pushButton_clicked()
 {
     Axis x;
-    x.setFont(QFont("arial", 10));
+    x.setFont(QFont("arial", 8));
     x.setTick(ui->eTick->text().toDouble());
     if(ui->cKierunek->currentText()=="wewnątrz")
         x.setTickDirection(inside);
     else if(ui->cKierunek->currentText()=="zewnątrz")
         x.setTickDirection(outside);
     else x.setTickDirection(middle);
-    x.setTickSize(5);
+    x.setTickSize(4);
     x.setMax(ui->eMax->text().toDouble());
     x.setMin(ui->eMin->text().toDouble());
     x.setPosition(left);
@@ -111,14 +117,14 @@ void MainWindow::on_pushButton_2_clicked()
 void MainWindow::on_pushButton_3_clicked()
 {
     Axis x;
-    x.setFont(QFont("arial", 10));
+    x.setFont(QFont("verdana", 6));
     x.setTick(ui->eTick->text().toDouble());
     if(ui->cKierunek->currentText()=="wewnątrz")
         x.setTickDirection(inside);
     else if(ui->cKierunek->currentText()=="zewnątrz")
         x.setTickDirection(outside);
     else x.setTickDirection(middle);
-    x.setTickSize(5);
+    x.setTickSize(4);
     x.setMax(ui->eMax->text().toDouble());
     x.setMin(ui->eMin->text().toDouble());
     if(ui->cKierunek->currentText() == "środek")
