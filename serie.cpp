@@ -2,6 +2,13 @@
 
 Serie::Serie()
 {
+    this->dotsStyle = DotStyle();
+    this->lineStyle = LineStyle();
+    this->length = 2;
+    this->pointsConnected = true;
+    this->showDots = false;
+    this->pointsConnectingStyle = line;
+    this->axisId = 0;
 }
 
 void Serie::addPoint(double value)
@@ -91,4 +98,14 @@ void Serie::setDotStyle(DotStyle style)
 DotStyle Serie::getDotStyle()
 {
     return this->dotsStyle;
+}
+
+void Serie::setAxisId(int id)
+{
+    this->axisId = id;
+}
+
+int Serie::getAxisId()
+{
+    return this->axisId;
 }

@@ -32,6 +32,8 @@ public:
     bool getDotsVisibility();
     void setDotStyle(DotStyle style);
     DotStyle getDotStyle();
+    void setAxisId(int id);
+    int getAxisId();
 private:
     std::vector<double> points;
     int length;
@@ -41,6 +43,7 @@ private:
     bool pointsConnected;
     bool showDots;
     DotStyle dotsStyle;
+    int axisId;
 };
 
 #endif // SERIE_H

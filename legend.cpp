@@ -1,7 +1,15 @@
 #include "legend.h"
 
-Legend::Legend()
+//Legend::Legend()
+//{
+//    this->geometry = Geometry(0, 0, 0, 0);
+//    this->orientation = vertical;
+//}
+
+Legend::Legend(Orientation orientation)
 {
+    this->geometry = Geometry(0, 0, 0, 0);
+    this->orientation = orientation;
 }
 
 void Legend::addLabel(Label label)
@@ -34,7 +42,7 @@ void Legend::removeLabel(int id)
     this->setGeometry(Geometry(0, 0, width, height));
 }
 
-Label Legend::getLabel(int id)
+Label &Legend::getLabel(int id)
 {
     return this->labels[id];
 }
@@ -54,7 +62,7 @@ void Legend::setGeometry(Geometry geometry)
     this->geometry = geometry;
 }
 
-Geometry Legend::getGeometry()
+Geometry &Legend::getGeometry()
 {
     return this->geometry;
 }

@@ -1,15 +1,18 @@
 #include "dotstyle.h"
 
-DotStyle::DotStyle()
+DotStyle::DotStyle(QColor color, Shape shape, int size)
 {
+    this->color = color;
+    this->shape = shape;
+    this->size = size;
 }
 
-void DotStyle::setColor(Color color)
+void DotStyle::setColor(QColor color)
 {
     this->color = color;
 }
 
-Color DotStyle::getColor()
+QColor DotStyle::getColor()
 {
     return this->color;
 }

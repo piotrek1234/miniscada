@@ -2,6 +2,13 @@
 
 Chart::Chart()
 {
+    this->showGrid = false;
+    this->showLabel = false;
+    this->showLegend = false;
+    this->geometry = Geometry(0, 0, 0, 0);
+    this->gridForAxis = 0;
+    this->gridStyle = LineStyle();
+    this->legend = Legend();
 }
 
 QPixmap Chart::draw()
@@ -11,6 +18,8 @@ QPixmap Chart::draw()
     p.begin(&temp);
     p.fillRect(0, 0, temp.width(), temp.height(), Qt::white);
     p.drawPixmap(0, 0, this->background);
+
+    //początkowa pozycja rysowania
     int x=0;
     int y=this->getAxisY(0).getGeometry().getHeight()-10;
     for(int i=0; i<this->getAxisCount(); i++)
@@ -19,12 +28,15 @@ QPixmap Chart::draw()
             x+= this->getAxisY(i).draw().width();
     }
 
-    //dla każdej serii czy tam osi
-    const double scale = double(this->getAxisY(0).getGeometry().getHeight()-20)/(this->getAxisY(0).getMax()-this->getAxisY(0).getMin());
-    for(int i=0; i<this->getSerie(0)->getLength()-1; i++)
+    //dla każdej serii
+    for(int j=0; j<this->getSeriesCount(); j++)
     {
-        p.setPen(QPen(QBrush(this->getSerie(0)->getLineStyle().getColor()), this->getSerie(0)->getLineStyle().getWidth(), this->getSerie(0)->getLineStyle().getType()));
-        p.drawLine(x+i*20, y-scale*(this->getSerie(0)->getPoint(i)-this->getAxisY(0).getMin()), (i+1)*20+x, y-scale*(this->getSerie(0)->getPoint(i+1)-this->getAxisY(0).getMin()));
+        const double scale = double(this->getAxisY(0).getGeometry().getHeight()-20)/(this->getAxisY(this->getSerie(j)->getAxisId()).getMax()-this->getAxisY(this->getSerie(j)->getAxisId()).getMin());
+        for(int i=0; i<this->getSerie(j)->getLength()-1; i++)
+        {
+            p.setPen(QPen(QBrush(this->getSerie(j)->getLineStyle().getColor()), this->getSerie(j)->getLineStyle().getWidth(), this->getSerie(j)->getLineStyle().getType()));
+            p.drawLine(x+i*20, y-scale*(this->getSerie(j)->getPoint(i)-this->getAxisY(this->getSerie(j)->getAxisId()).getMin()), (i+1)*20+x, y-scale*(this->getSerie(j)->getPoint(i+1)-this->getAxisY(this->getSerie(1)->getAxisId()).getMin()));
+        }
     }
 
     p.end();
@@ -102,6 +114,7 @@ Geometry &Chart::getGeometry()
 void Chart::addSerie(Serie *serie)
 {
     series.push_back(serie);
+    this->legend.addLabel(Label("(nowa seria)", Geometry(), Icon(serie->getLineStyle().getColor())));
 }
 
 void Chart::removeSerie(int id)
@@ -139,7 +152,7 @@ void Chart::setGridStyle(LineStyle style)
     this->gridStyle = style;
 }
 
-LineStyle Chart::getGridStyle()
+LineStyle &Chart::getGridStyle()
 {
     return this->gridStyle;
 }
@@ -217,4 +230,14 @@ int Chart::getAxisCount()
 int Chart::getSeriesCount()
 {
     return this->series.size();
+}
+
+int Chart::getGridAxis()
+{
+    return this->gridForAxis;
+}
+
+void Chart::setGridAxis(int id)
+{
+    this->gridForAxis = id;
 }

@@ -26,7 +26,7 @@ public:
     void setTick(double tick);
     double getTick();
     void setGridStyle(LineStyle style);
-    LineStyle getGridStyle();
+    LineStyle& getGridStyle();
     void setLegend(Legend legend);
     Legend &getLegend();
     void setAxisX(Axis axis);
@@ -42,6 +42,8 @@ public:
     bool getLabelVisibility();
     int getAxisCount();
     int getSeriesCount();
+    int getGridAxis();
+    void setGridAxis(int id);
 private:
     std::vector<Serie*> series;
     Label label;
@@ -54,6 +56,7 @@ private:
     bool showGrid;
     bool showLegend;
     bool showLabel;
+    int gridForAxis;
     QPixmap background;
 };
 

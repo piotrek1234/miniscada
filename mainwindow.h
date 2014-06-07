@@ -26,12 +26,17 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_4_clicked();
+
 private:
     Ui::MainWindow *ui;
     //int i;
     //Legend leg;
     Chart ch;
     Serie* s;
+    QColor kolor;
 };
 
 #endif // MAINWINDOW_H

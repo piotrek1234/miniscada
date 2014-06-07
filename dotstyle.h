@@ -1,7 +1,7 @@
 #ifndef DOTSTYLE_H
 #define DOTSTYLE_H
 
-#include "color.h"
+#include <QColor>
 
 enum Shape{
     square,
@@ -12,15 +12,15 @@ enum Shape{
 class DotStyle
 {
 public:
-    DotStyle();
-    void setColor(Color color);
-    Color getColor();
+    DotStyle(QColor color = Qt::black, Shape shape = circle, int size = 2);
+    void setColor(QColor color);
+    QColor getColor();
     void setShape(Shape shape);
     Shape getShape();
     void setSize(int size);
     int getSize();
 private:
-    Color color;
+    QColor color;
     Shape shape;
     int size;
 };

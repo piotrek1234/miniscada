@@ -2,7 +2,19 @@
 
 Axis::Axis()
 {
-
+    this->autoscale = false;
+    this->font = QFont("verdana", 8);
+    this->geometry = Geometry();
+    this->max = 100;
+    this->min = 0;
+    this->tick = 10;
+    this->tickDirection = inside;
+    this->tickSize = 4;
+    this->position = left;
+    this->showUnit = false;
+    this->label = Label();
+    this->unit = "";
+    this->lineStyle = LineStyle();
 }
 
 void Axis::setLabel(Label label)
@@ -146,10 +158,10 @@ QPixmap Axis::draw()
     float space;
 
     //najdluzszy tekst
-    for(int i=1; i<=tickCount; i++)
+    for(int i=0; i<=tickCount; i++)
     {
-        if(fm.width(QString::number(this->max-tick*i)+unit) > textWidth)
-            textWidth = fm.width(QString::number(this->max-tick*i)+unit);
+        if(fm.width(QString::number(this->min+tick*i)+unit) > textWidth)
+            textWidth = fm.width(QString::number(this->min+tick*i)+unit);
     }
 
     if(position==left || position==right)

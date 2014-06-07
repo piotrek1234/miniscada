@@ -2,6 +2,11 @@
 
 Label::Label()
 {
+    this->geometry = Geometry();
+    this->font = QFont("verdana", 10);
+    this->orientation = horizontal;
+    this->icon = Icon(Qt::white, Geometry(0, 0, 0, 0));
+    this->text = "";
 }
 
 Label::Label(QString text, Geometry geometry, Icon icon, QFont font, Orientation orientation)

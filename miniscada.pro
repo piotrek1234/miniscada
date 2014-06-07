@@ -15,8 +15,6 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     geometry.cpp \
-    font.cpp \
-    color.cpp \
     dotstyle.cpp \
     linestyle.cpp \
     serie.cpp \
@@ -28,8 +26,6 @@ SOURCES += main.cpp\
 
 HEADERS  += mainwindow.h \
     geometry.h \
-    font.h \
-    color.h \
     dotstyle.h \
     linestyle.h \
     serie.h \

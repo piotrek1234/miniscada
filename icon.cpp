@@ -1,7 +1,10 @@
 #include "icon.h"
+#include <stdlib.h>
 
 Icon::Icon()
 {
+    this->color = QColor((float)qrand()/RAND_MAX*255, (float)qrand()/RAND_MAX*255, (float)qrand()/RAND_MAX*255);
+    this->geometry = Geometry(0, 0, 10, 10);
 }
 
 Icon::Icon(QColor color, Geometry geometry)
@@ -10,11 +13,11 @@ Icon::Icon(QColor color, Geometry geometry)
     this->geometry = geometry;
 }
 
-Icon::Icon(Geometry geometry, QColor color)
+/*Icon::Icon(Geometry geometry, QColor color)
 {
     this->geometry = Geometry(geometry);
     this->color = color;
-}
+}*/
 
 void Icon::setGeometry(Geometry geometry)
 {

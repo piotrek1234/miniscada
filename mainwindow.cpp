@@ -7,6 +7,7 @@
 #include "legend.h"
 #include <stdlib.h>
 #include <time.h>
+#include <QPainter>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -45,33 +46,34 @@ MainWindow::MainWindow(QWidget *parent) :
     x.setUnitVisibility(false);
     x.setGeometry(Geometry(0, 0, 400, 30));
 
-    Legend leg;
-    leg.addLabel(Label("Etykieta 1", Geometry(0, 0, 0, 20), Icon(Geometry(0, 0, 20, 20), Qt::red)));
+    //Legend leg;
+    /*leg.addLabel(Label("Etykieta 1", Geometry(0, 0, 0, 20), Icon(Geometry(0, 0, 20, 20), Qt::red)));
     leg.addLabel(Label("Etykieta 2", Geometry(0, 0, 0, 20), Icon(QColor(255, 150, 0))));
     leg.addLabel(Label("Etykieta 3", Geometry(0, 0, 0, 20), Icon(Qt::darkBlue)));
-    leg.addLabel(Label("Etykieta 4", Geometry(0, 0, 0, 20), Icon(Qt::cyan)));
+    leg.addLabel(Label("Etykieta 4", Geometry(0, 0, 0, 20), Icon(Qt::cyan)));*/
 
     ch.setAxisX(x);
     x.setPosition(bottom);
     x.setGeometry(Geometry(0, 0, 40, 400));
     ch.addAxisY(x);
     ch.setGeometry(Geometry(0, 0, 500, 500));
-    ch.setLegend(leg);
+    //ch.setLegend(leg);
 
     LineStyle ls;
     ls.setWidth(2);
-    ls.setColor(Qt::red);
-    ls.setType(Qt::DashLine);
+    ls.setColor(QColor(255, 127, 40));
+    ls.setType(Qt::SolidLine);
 
     s = new Serie;
     s->setLength(20);
     s->setLineStyle(ls);
-    s->setTick(20);
-    s->addPoint(0);
-    s->addPoint(50);
-    s->addPoint(20);
-    s->addPoint(100);
-    s->addPoint(50);
+    s->setAxisId(0);
+//    s->setTick(20);
+//    s->addPoint(0);
+//    s->addPoint(50);
+//    s->addPoint(20);
+//    s->addPoint(100);
+//    s->addPoint(50);
     ch.addSerie(s);
 
     srand(time(NULL));
@@ -110,7 +112,8 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    ch.getSerie(0)->addPoint((double)rand()/RAND_MAX*(ch.getAxisY(0).getMax()-ch.getAxisY(0).getMin())+ch.getAxisY(0).getMin());
+    ch.getSerie(1)->addPoint((double)rand()/RAND_MAX*(ch.getAxisY(ch.getSerie(1)->getAxisId()).getMax()-ch.getAxisY(ch.getSerie(1)->getAxisId()).getMin())+ch.getAxisY(ch.getSerie(1)->getAxisId()).getMin());
+    ch.getSerie(0)->addPoint((double)rand()/RAND_MAX*(ch.getAxisY(ch.getSerie(0)->getAxisId()).getMax()-ch.getAxisY(ch.getSerie(0)->getAxisId()).getMin())+ch.getAxisY(ch.getSerie(0)->getAxisId()).getMin());
     ui->label->setPixmap(ch.draw());
 }
 
@@ -127,7 +130,7 @@ void MainWindow::on_pushButton_3_clicked()
     x.setTickSize(4);
     x.setMax(ui->eMax->text().toDouble());
     x.setMin(ui->eMin->text().toDouble());
-    if(ui->cKierunek->currentText() == "środek")
+    if(ui->cStrona->currentText() == "prawa")
         x.setPosition(right);
     else x.setPosition(left);
     x.setUnitVisibility(ui->cJednostka->isChecked());
@@ -138,4 +141,25 @@ void MainWindow::on_pushButton_3_clicked()
     ch.addAxisY(x);
     ch.drawBackground();
     ui->label->setPixmap(ch.draw());
+}
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    QPixmap px = QPixmap(ui->lKolor->width(), ui->lKolor->height());
+    QPainter p;
+    p.begin(&px);
+    kolor = QColor((float)qrand()/RAND_MAX*255, (float)qrand()/RAND_MAX*255, (float)qrand()/RAND_MAX*255);
+    p.fillRect(0, 0, ui->lKolor->width(), ui->lKolor->height(), kolor);
+
+    p.end();
+    ui->lKolor->setPixmap(px);
+}
+
+void MainWindow::on_pushButton_4_clicked()
+{
+    Serie *seria = new Serie;
+    seria->setAxisId(ui->eOs->text().toInt());
+    seria->setLength(20);
+    seria->setLineStyle(LineStyle(2, kolor));
+    ch.addSerie(seria);
 }

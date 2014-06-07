@@ -10,7 +10,7 @@ class Icon
 public:
     Icon();
     Icon(QColor color, Geometry geometry = Geometry(0, 0, 10, 10));
-    Icon(Geometry geometry, QColor color);
+    //Icon(Geometry geometry, QColor color);
     void setGeometry(Geometry geometry);
     Geometry &getGeometry();
     void setColor(QColor color);

@@ -1,7 +1,17 @@
 #include "linestyle.h"
 
-LineStyle::LineStyle()
+//LineStyle::LineStyle()
+//{
+//    this->color = Qt::black;
+//    this->width = 1;
+//    this->type = Qt::SolidLine;
+//}
+
+LineStyle::LineStyle(int width, QColor color, Qt::PenStyle lineType)
 {
+    this->width = width;
+    this->color = color;
+    this->type = lineType;
 }
 
 void LineStyle::setColor(QColor color)
