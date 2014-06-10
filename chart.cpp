@@ -31,11 +31,11 @@ QPixmap Chart::draw()
     //dla każdej serii
     for(int j=0; j<this->getSeriesCount(); j++)
     {
-        const double scale = double(this->getAxisY(0).getGeometry().getHeight()-20)/(this->getAxisY(this->getSerie(j)->getAxisId()).getMax()-this->getAxisY(this->getSerie(j)->getAxisId()).getMin());
+        const double scale = double(this->getAxisY(this->getSerie(j)->getAxisId()).getGeometry().getHeight()-20)/(this->getAxisY(this->getSerie(j)->getAxisId()).getMax()-this->getAxisY(this->getSerie(j)->getAxisId()).getMin());
         for(int i=0; i<this->getSerie(j)->getLength()-1; i++)
         {
             p.setPen(QPen(QBrush(this->getSerie(j)->getLineStyle().getColor()), this->getSerie(j)->getLineStyle().getWidth(), this->getSerie(j)->getLineStyle().getType()));
-            p.drawLine(x+i*20, y-scale*(this->getSerie(j)->getPoint(i)-this->getAxisY(this->getSerie(j)->getAxisId()).getMin()), (i+1)*20+x, y-scale*(this->getSerie(j)->getPoint(i+1)-this->getAxisY(this->getSerie(1)->getAxisId()).getMin()));
+            p.drawLine(x+i*20, y-scale*(this->getSerie(j)->getPoint(i)-this->getAxisY(this->getSerie(j)->getAxisId()).getMin()), (i+1)*20+x, y-scale*(this->getSerie(j)->getPoint(i+1)-this->getAxisY(this->getSerie(j)->getAxisId()).getMin()));
         }
     }
 

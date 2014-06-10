@@ -85,13 +85,24 @@ QPixmap Label::draw()
 
     QPixmap temp(this->getGeometry().getWidth(), this->getGeometry().getHeight());
     QPainter p;
+
     p.begin(&temp);
-    p.fillRect(0, 0, temp.width(), temp.height(), Qt::white);
+
+
+    p.fillRect(0, 0, temp.width(), temp.height(), Qt::yellow);
     p.setFont(this->getFont());
     p.fillRect(5, (this->getGeometry().getHeight()-this->icon.getGeometry().getHeight())/2, this->icon.getGeometry().getWidth(), this->icon.getGeometry().getWidth(), this->icon.getColor());
     p.drawText(10+this->icon.getGeometry().getWidth(), (this->getGeometry().getHeight()+textHeight)/2-5, this->text);
 
     p.end();
+    if(this->orientation == vertical)
+    {
+        QMatrix rm;
+        rm.translate(temp.width()/2, temp.height()/2);
+        rm.rotate(-90);
+        this->setGeometry(Geometry(0, 0, 10+wys, 15+textWidth+this->icon.getGeometry().getWidth()));
+        return temp.transformed(rm);
+    }
 
     return temp;
 }

@@ -112,8 +112,10 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    ch.getSerie(1)->addPoint((double)rand()/RAND_MAX*(ch.getAxisY(ch.getSerie(1)->getAxisId()).getMax()-ch.getAxisY(ch.getSerie(1)->getAxisId()).getMin())+ch.getAxisY(ch.getSerie(1)->getAxisId()).getMin());
-    ch.getSerie(0)->addPoint((double)rand()/RAND_MAX*(ch.getAxisY(ch.getSerie(0)->getAxisId()).getMax()-ch.getAxisY(ch.getSerie(0)->getAxisId()).getMin())+ch.getAxisY(ch.getSerie(0)->getAxisId()).getMin());
+    for(int i=0; i<ch.getSeriesCount(); i++)
+    {
+        ch.getSerie(i)->addPoint((double)rand()/RAND_MAX*(ch.getAxisY(ch.getSerie(i)->getAxisId()).getMax()-ch.getAxisY(ch.getSerie(i)->getAxisId()).getMin())+ch.getAxisY(ch.getSerie(i)->getAxisId()).getMin());
+    }
     ui->label->setPixmap(ch.draw());
 }
 
@@ -136,6 +138,7 @@ void MainWindow::on_pushButton_3_clicked()
     x.setUnitVisibility(ui->cJednostka->isChecked());
     x.setGeometry(Geometry(0, 0, 40, 400));
     x.setUnit(ui->eJednostka->text());
+    x.setLabel(Label("aaa", Geometry(0,0,10,10), Icon(Qt::red), QFont("Arial", 8), vertical));
     x.draw();
 
     ch.addAxisY(x);
@@ -162,4 +165,6 @@ void MainWindow::on_pushButton_4_clicked()
     seria->setLength(20);
     seria->setLineStyle(LineStyle(2, kolor));
     ch.addSerie(seria);
+    ch.drawBackground();
+    ui->label->setPixmap(ch.draw());
 }

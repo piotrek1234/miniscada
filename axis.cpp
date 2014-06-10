@@ -167,8 +167,13 @@ QPixmap Axis::draw()
     if(position==left || position==right)
     {
         //this->setGeometry(Geometry(0,0,textWidth+6+this->tickSize, this->geometry.getHeight()));
-        temp = QPixmap(textWidth+6+this->tickSize, this->geometry.getHeight());
+        int dodatek=0;
+        if(this->label.getGeometry().getWidth()>0)
+            dodatek = this->label.getGeometry().getWidth()+2;
+        temp = QPixmap(textWidth+6+this->tickSize+dodatek, this->geometry.getHeight());
         space = (temp.height()-20)/(max-min)*tick;
+        if(position == left)
+            textWidth += dodatek;
     }
     else
     {
@@ -184,6 +189,12 @@ QPixmap Axis::draw()
 
     if(position==left)
     {
+        if(this->label.getGeometry().getWidth() > 0)
+        {
+            //textWidth += this->label.getGeometry().getWidth()+2;
+            p.drawPixmap(0, (temp.height()-this->label.getGeometry().getHeight())/2, this->label.draw());
+        }
+
         if(tickDirection==inside)
             p.drawLine(textWidth+5, 10, textWidth+5, temp.height()-10);
         else if(tickDirection == middle)
@@ -213,6 +224,12 @@ QPixmap Axis::draw()
             p.drawText(6+tickSize, temp.height()-10-i*space-textHeight/2, textWidth, textHeight, Qt::AlignLeft, QString::number(min+tick*i)+unit);
         }
         p.drawLine(1, 10, 1+tickSize, 10);
+
+        if(this->label.getGeometry().getWidth() > 0)
+        {
+            //textWidth += this->label.getGeometry().getWidth()+2;
+            p.drawPixmap(6+tickSize+textWidth+2, (temp.height()-this->label.getGeometry().getHeight())/2, this->label.draw());
+        }
     }
     else if(position == bottom)
     {
