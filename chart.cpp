@@ -7,7 +7,7 @@ Chart::Chart()
     this->showLegend = false;
     this->geometry = Geometry(0, 0, 0, 0);
     this->gridForAxis = 0;
-    this->gridStyle = LineStyle();
+    this->gridStyle = LineStyle(1, Qt::gray, Qt::SolidLine);
     this->legend = Legend();
 }
 
@@ -82,6 +82,16 @@ void Chart::drawBackground()
             prevWidth+= this->getAxisY(i).getGeometry().getWidth();
         }
     }
+    //siatka
+    p.setPen(QPen(QBrush(this->getGridStyle().getColor()), this->getGridStyle().getWidth(), this->getGridStyle().getType()));
+    const float space = (this->getAxisY(gridForAxis).getGeometry().getHeight()-20)/(this->getAxisY(gridForAxis).getMax()-this->getAxisY(gridForAxis).getMin())*this->getAxisY(gridForAxis).getTick();
+    const int tickCount = (this->getAxisY(gridForAxis).getMax()-this->getAxisY(gridForAxis).getMin())*this->getAxisY(gridForAxis).getTick();
+    for(int i=tickCount; i>=0; i--)
+    {
+        p.drawLine(prevWidth, this->getAxisY(gridForAxis).getGeometry().getHeight()-10-i*space, prevWidth+this->getAxisX().getGeometry().getWidth(), this->getAxisY(gridForAxis).getGeometry().getHeight()-10-i*space);
+    }
+    p.drawLine(prevWidth, 10,  prevWidth+this->getAxisX().getGeometry().getWidth(), 10);
+
     //prawe osie y
     prevWidth += this->getAxisX().getGeometry().getWidth()-20;
     for(int i=0; i<this->getAxisCount(); i++)

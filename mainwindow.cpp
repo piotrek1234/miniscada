@@ -138,7 +138,7 @@ void MainWindow::on_pushButton_3_clicked()
     x.setUnitVisibility(ui->cJednostka->isChecked());
     x.setGeometry(Geometry(0, 0, 40, 400));
     x.setUnit(ui->eJednostka->text());
-    x.setLabel(Label("aaa", Geometry(0,0,10,10), Icon(Qt::red), QFont("Arial", 8), vertical));
+    x.setLabel(Label(ui->eTytul->text(), Geometry(0,0,ui->cEtykieta->isChecked()?10:0,10), Icon(Qt::red, Geometry(0,0,0,0)), QFont("Arial", 8), vertical));
     x.draw();
 
     ch.addAxisY(x);
@@ -165,6 +165,13 @@ void MainWindow::on_pushButton_4_clicked()
     seria->setLength(20);
     seria->setLineStyle(LineStyle(2, kolor));
     ch.addSerie(seria);
+    ch.drawBackground();
+    ui->label->setPixmap(ch.draw());
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    ch.setGridAxis(ui->eGridAx->text().toInt());
     ch.drawBackground();
     ui->label->setPixmap(ch.draw());
 }
