@@ -1,5 +1,17 @@
 #include "axis.h"
 
+/**
+ * @brief Axis::Axis
+ *tworzy oś z paramterami:
+ *czcionka: Verdana, 8pt
+ *wartość minimalna: 0
+ *wartość maksymalna: 100
+ *odstęp wartości: 10
+ *podziałka: 4px skierowana do wewnątrz
+ *pusta etykieta
+ *bez jednostki
+ *domyślny styl linii
+ */
 Axis::Axis()
 {
     this->autoscale = false;
@@ -17,31 +29,55 @@ Axis::Axis()
     this->lineStyle = LineStyle();
 }
 
+/**
+ * @brief Axis::setLabel
+ * @param label etykieta
+ */
 void Axis::setLabel(Label label)
 {
     this->label = label;
 }
 
+/**
+ * @brief Axis::getLabel
+ * @return referencję do etykiety
+ */
 Label &Axis::getLabel()
 {
     return this->label;
 }
 
+/**
+ * @brief Axis::setLineStyle
+ * @param style styl linii
+ */
 void Axis::setLineStyle(LineStyle style)
 {
     this->lineStyle = style;
 }
 
+/**
+ * @brief Axis::getLineStyle
+ * @return referencję do stylu linii
+ */
 LineStyle &Axis::getLineStyle()
 {
     return this->lineStyle;
 }
 
+/**
+ * @brief Axis::setTick
+ * @param tick odstęp wartości na osi
+ */
 void Axis::setTick(double tick)
 {
     this->tick = tick;
 }
 
+/**
+ * @brief Axis::getTick
+ * @return odstęp wartości na osi
+ */
 double Axis::getTick()
 {
     return this->tick;
@@ -57,96 +93,172 @@ bool Axis::getAutoscale()
     return this->autoscale;
 }
 
+/**
+ * @brief Axis::setMin
+ * @param min wartość minimalna na osi
+ */
 void Axis::setMin(double min)
 {
     this->min = min;
 }
 
+/**
+ * @brief Axis::getMin
+ * @return wartość minimalną na osi
+ */
 double Axis::getMin()
 {
     return this->min;
 }
 
+/**
+ * @brief Axis::setMax
+ * @param max wartość maksymalna na osi
+ */
 void Axis::setMax(double max)
 {
     this->max = max;
 }
 
+/**
+ * @brief Axis::getMax
+ * @return wartość maksymalną na osi
+ */
 double Axis::getMax()
 {
     return this->max;
 }
 
+/**
+ * @brief Axis::setTickSize
+ * @param size szerokość podziałki
+ */
 void Axis::setTickSize(int size)
 {
     this->tickSize = size;
 }
 
+/**
+ * @brief Axis::getTickSize
+ * @return szerokość podziałki
+ */
 int Axis::getTickSize()
 {
     return this->tickSize;
 }
 
+/**
+ * @brief Axis::setTickDirection
+ * @param direction kierunek podziałki
+ */
 void Axis::setTickDirection(Direction direction)
 {
     this->tickDirection = direction;
 }
 
+/**
+ * @brief Axis::getTickDirection
+ * @return kierunek podziałki
+ */
 Direction Axis::getTickDirection()
 {
     return this->tickDirection;
 }
 
+/**
+ * @brief Axis::setUnitVisibility
+ * @param visible widoczność jednostki
+ */
 void Axis::setUnitVisibility(bool visible)
 {
     this->showUnit = visible;
 }
 
+/**
+ * @brief Axis::getUnitVisibility
+ * @return widoczność jednostki
+ */
 bool Axis::getUnitVisibility()
 {
     return this->showUnit;
 }
 
+/**
+ * @brief Axis::setFont
+ * @param font czcionka
+ */
 void Axis::setFont(QFont font)
 {
     this->font = font;
 }
 
+/**
+ * @brief Axis::getFont
+ * @return czcionkę
+ */
 QFont Axis::getFont()
 {
     return this->font;
 }
 
+/**
+ * @brief Axis::setPosition
+ * @param position pozycja osi (lewa/prawa/góra/dół)
+ */
 void Axis::setPosition(Position position)
 {
     this->position = position;
 }
 
+/**
+ * @brief Axis::getPosition
+ * @return pozycję osi
+ */
 Position Axis::getPosition()
 {
     return this->position;
 }
 
+/**
+ * @brief Axis::setUnit
+ * @param unit jednostka
+ */
 void Axis::setUnit(QString unit)
 {
     this->unit = unit;
 }
 
+/**
+ * @brief Axis::getUnit
+ * @return jednostkę
+ */
 QString Axis::getUnit()
 {
     return this->unit;
 }
 
+/**
+ * @brief Axis::setGeometry
+ * @param geometry rozmiar
+ */
 void Axis::setGeometry(Geometry geometry)
 {
     this->geometry = geometry;
 }
 
+/**
+ * @brief Axis::getGeometry
+ * @return referencję do rozmiaru
+ */
 Geometry &Axis::getGeometry()
 {
     return this->geometry;
 }
 
+/**
+ * @brief Axis::draw
+ * @return narysowaną właśnie oś
+ */
 QPixmap Axis::draw()
 {
     QFontMetrics fm(this->getFont());

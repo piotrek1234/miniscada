@@ -1,6 +1,16 @@
 #ifndef CHART_H
 #define CHART_H
 
+/**
+  *\mainpage
+  *\par Bardzo mini scada
+  *Aplikacja umożliwiająca ciągłe wyświetlanie danych pomiarowych przesyłanych przez sieć. Program ma umożliwiać buforowanie otrzymanych danych, skalowanie wykresów, ustalanie wszystkich parametrów wyświetlania (siatka, kolory, skalowanie, rodzaj linii), i ma się cechować wysoką wydajnością. Ma umożliwiać kopiowanie aktualnej zawartości wykresu i wstawianie go do schowka systemowego. W skład projektu wchodzą dwa programy – serwer generujące dane i klient wyświetlający dane.
+  *\par Autorzy
+  *Piotr Kuciński\n
+  *Radosław Ławrynowicz
+  *
+  *
+  */
 #include <QPixmap>
 #include <vector>
 #include "label.h"

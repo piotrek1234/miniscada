@@ -6,12 +6,18 @@
 //    this->orientation = vertical;
 //}
 
-Legend::Legend(Orientation orientation)
+/**
+ * @brief Legend::Legend
+ */
+Legend::Legend()
 {
     this->geometry = Geometry(0, 0, 0, 0);
-    this->orientation = orientation;
 }
 
+/**
+ * @brief Legend::addLabel
+ * @param label etykieta do dodania
+ */
 void Legend::addLabel(Label label)
 {
     this->labels.push_back(label);
@@ -27,6 +33,10 @@ void Legend::addLabel(Label label)
     this->setGeometry(Geometry(0, 0, width, height));
 }
 
+/**
+ * @brief Legend::removeLabel
+ * @param id numer etykiety do usunięcia
+ */
 void Legend::removeLabel(int id)
 {
     this->labels.erase(labels.begin()+id);
@@ -42,36 +52,47 @@ void Legend::removeLabel(int id)
     this->setGeometry(Geometry(0, 0, width, height));
 }
 
+/**
+ * @brief Legend::getLabel
+ * @param id numer etykiety do poprania
+ * @return referencję do etykiety
+ */
 Label &Legend::getLabel(int id)
 {
     return this->labels[id];
 }
 
-void Legend::setOrientation(Orientation orientation)
-{
-    this->orientation = orientation;
-}
-
-Orientation Legend::getOrientation()
-{
-    return this->orientation;
-}
-
+/**
+ * @brief Legend::setGeometry
+ * @param geometry rozmiar
+ */
 void Legend::setGeometry(Geometry geometry)
 {
     this->geometry = geometry;
 }
 
+/**
+ * @brief Legend::getGeometry
+ * @return referencję do rozmiaru
+ */
 Geometry &Legend::getGeometry()
 {
     return this->geometry;
 }
 
+/**
+ * @brief Legend::getLabelsCount
+ * @return liczbę etykiet
+ */
 int Legend::getLabelsCount()
 {
     return this->labels.size();
 }
 
+/**
+ * @brief Legend::draw
+ * @return narysowaną legendę
+ */
 QPixmap Legend::draw()
 {
     int width=0, height=0, y=0;
@@ -101,6 +122,10 @@ QPixmap Legend::draw()
     return temp;
 }
 
+/**
+ * @brief Legend::refresh
+ *odświeża rozmiar legendy
+ */
 void Legend::refresh()
 {
     this->pixmap = this->draw();

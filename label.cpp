@@ -1,5 +1,8 @@
 #include "label.h"
 
+/**
+ * @brief Label::Label
+ */
 Label::Label()
 {
     this->geometry = Geometry();
@@ -9,6 +12,14 @@ Label::Label()
     this->text = "";
 }
 
+/**
+ * @brief Label::Label
+ * @param text treść
+ * @param geometry rozmiar
+ * @param icon ikona
+ * @param font czcionka
+ * @param orientation orientacja (pozioma, pionowa)
+ */
 Label::Label(QString text, Geometry geometry, Icon icon, QFont font, Orientation orientation)
 {
     this->text = text;
@@ -18,61 +29,109 @@ Label::Label(QString text, Geometry geometry, Icon icon, QFont font, Orientation
     this->orientation = orientation;
 }
 
+/**
+ * @brief Label::setText
+ * @param text treść
+ */
 void Label::setText(QString text)
 {
     this->text = text;
 }
 
+/**
+ * @brief Label::getText
+ * @return treść
+ */
 QString Label::getText()
 {
     return this->text;
 }
 
+/**
+ * @brief Label::setFont
+ * @param font czionka
+ */
 void Label::setFont(QFont font)
 {
     this->font = font;
 }
 
+/**
+ * @brief Label::getFont
+ * @return czcionkę
+ */
 QFont Label::getFont()
 {
     return this->font;
 }
 
+/**
+ * @brief Label::setGeometry
+ * @param geometry rozmiar
+ */
 void Label::setGeometry(Geometry geometry)
 {
     this->geometry = geometry;
 }
 
+/**
+ * @brief Label::getGeometry
+ * @return referencję do rozmiaru
+ */
 Geometry &Label::getGeometry()
 {
     return this->geometry;
 }
 
+/**
+ * @brief Label::setIcon
+ * @param icon ikona
+ */
 void Label::setIcon(Icon icon)
 {
     this->icon = icon;
 }
 
+/**
+ * @brief Label::getIcon
+ * @return referencję do ikony
+ */
 Icon &Label::getIcon()
 {
     return this->icon;
 }
 
+/**
+ * @brief Label::setOrientation
+ * @param orientation orientacja (pionowa, pozioma)
+ */
 void Label::setOrientation(Orientation orientation)
 {
     this->orientation = orientation;
 }
 
+/**
+ * @brief Label::getOrientation
+ * @return orientację
+ */
 Orientation Label::getOrientation()
 {
     return this->orientation;
 }
 
+/**
+ * @brief Label::getPixmap
+ * @return narysowaną poprzednio etykietę
+ */
 QPixmap &Label::getPixmap()
 {
     return this->pixmap;
 }
 
+/**
+ * @brief Label::draw
+ * @return narysowaną właśnie etykietę
+ */
 QPixmap Label::draw()
 {
     QFontMetrics fm(this->getFont());
@@ -107,6 +166,10 @@ QPixmap Label::draw()
     return temp;
 }
 
+/**
+ * @brief Label::refresh
+ *Rysuje etykietę w celu usalenia geometrii
+ */
 void Label::refresh()
 {
     this->pixmap = this->draw();

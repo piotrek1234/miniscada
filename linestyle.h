@@ -4,6 +4,7 @@
 //#include "color.h"
 #include <QColor>
 
+
 class LineStyle
 {
 public:

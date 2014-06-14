@@ -3,22 +3,23 @@
 
 #include "label.h"
 #include "linestyle.h"
-//#include "font.h"
 #include <QFont>
 #include <QPixmap>
 #include <QFontMetrics>
 
+//!Pozycja (dla osi)
 enum Position{
-    top,
-    bottom,
-    left,
-    right
+    top,    ///< u góry
+    bottom, ///< u dołu
+    left,   ///< po lewej
+    right   ///< po prawej
 };
 
+///Kierunek (dla podziałki osi)
 enum Direction{
-    inside,
-    outside,
-    middle
+    inside,     ///< w stronę wykresu
+    outside,    ///< w stronę osi
+    middle      ///< na środku
 };
 
 class Axis
