@@ -15,7 +15,7 @@ Geometry::Geometry()
 
 /**
  * @brief Geometry::Geometry
- * @param geometry klasa do skopiowania
+ * @param geometry geometria do skopiowania
  */
 Geometry::Geometry(const Geometry &geometry)
 {
@@ -53,7 +53,7 @@ void Geometry::setXY(int x, int y)
 
 /**
  * @brief Geometry::getX
- * @return pozycja pozioma
+ * @return pozycję poziomą
  */
 int Geometry::getX()
 {
@@ -62,7 +62,7 @@ int Geometry::getX()
 
 /**
  * @brief Geometry::getY
- * @return pozycja pionowa
+ * @return pozycję pionową
  */
 int Geometry::getY()
 {

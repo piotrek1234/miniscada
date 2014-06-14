@@ -7,6 +7,12 @@
 //    this->type = Qt::SolidLine;
 //}
 
+/**
+ * @brief LineStyle::LineStyle
+ * @param width szerokość linii
+ * @param color kolor linii
+ * @param lineType rodzaj linii
+ */
 LineStyle::LineStyle(int width, QColor color, Qt::PenStyle lineType)
 {
     this->width = width;
@@ -14,31 +20,55 @@ LineStyle::LineStyle(int width, QColor color, Qt::PenStyle lineType)
     this->type = lineType;
 }
 
+/**
+ * @brief LineStyle::setColor
+ * @param color kolor linii
+ */
 void LineStyle::setColor(QColor color)
 {
     this->color = color;
 }
 
+/**
+ * @brief LineStyle::getColor
+ * @return kolor linii
+ */
 QColor LineStyle::getColor()
 {
     return this->color;
 }
 
+/**
+ * @brief LineStyle::setWidth
+ * @param width szerokość linii
+ */
 void LineStyle::setWidth(int width)
 {
     this->width = width;
 }
 
+/**
+ * @brief LineStyle::getWidth
+ * @return szerokość linii
+ */
 int LineStyle::getWidth()
 {
     return this->width;
 }
 
+/**
+ * @brief LineStyle::setType
+ * @param type rodzaj linii
+ */
 void LineStyle::setType(Qt::PenStyle type)
 {
     this->type = type;
 }
 
+/**
+ * @brief LineStyle::getType
+ * @return rodzaj linii
+ */
 Qt::PenStyle LineStyle::getType()
 {
     return this->type;

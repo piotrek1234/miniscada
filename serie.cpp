@@ -1,5 +1,8 @@
 #include "serie.h"
 
+/**
+ * @brief Serie::Serie
+ */
 Serie::Serie()
 {
     this->dotsStyle = DotStyle();
@@ -11,6 +14,10 @@ Serie::Serie()
     this->axisId = 0;
 }
 
+/**
+ * @brief Serie::addPoint
+ * @param value wartość punktu
+ */
 void Serie::addPoint(double value)
 {
     points.push_back(value);
@@ -18,21 +25,38 @@ void Serie::addPoint(double value)
         points.erase(points.begin());
 }
 
+/**
+ * @brief Serie::clear
+ *czyści punkty
+ */
 void Serie::clear()
 {
     points.clear();
 }
 
+/**
+ * @brief Serie::getPoint
+ * @param id numer punktu do pobrania
+ * @return wartość punktu
+ */
 double Serie::getPoint(int id)
 {
     return points.at(id);
 }
 
+/**
+ * @brief Serie::setLength
+ * @param length rozmiar bufora
+ */
 void Serie::setLength(int length)
 {
     this->length = length;
 }
 
+/**
+ * @brief Serie::getLength
+ * @return rozmiar bufora
+ */
 int Serie::getLength()
 {
     if(points.size()<length)
@@ -50,11 +74,19 @@ double Serie::getTick()
     return this->tick;
 }
 
+/**
+ * @brief Serie::setLineStyle
+ * @param style styl linii
+ */
 void Serie::setLineStyle(LineStyle style)
 {
     this->lineStyle = style;
 }
 
+/**
+ * @brief Serie::getLineStyle
+ * @return styl linii
+ */
 LineStyle Serie::getLineStyle()
 {
     return this->lineStyle;
@@ -100,11 +132,19 @@ DotStyle Serie::getDotStyle()
     return this->dotsStyle;
 }
 
+/**
+ * @brief Serie::setAxisId
+ * @param id numer osi, do której dopasowane będą wartości
+ */
 void Serie::setAxisId(int id)
 {
     this->axisId = id;
 }
 
+/**
+ * @brief Serie::getAxisId
+ * @return numer osi, do której dopasowane będą wartości
+ */
 int Serie::getAxisId()
 {
     return this->axisId;

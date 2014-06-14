@@ -10,13 +10,10 @@
 class Legend
 {
 public:
-    //Legend();
-    Legend(Orientation orientation = vertical);
+    Legend();
     void addLabel(Label label);
     void removeLabel(int id);
     Label& getLabel(int id);
-    void setOrientation(Orientation orientation);
-    Orientation getOrientation();
     void setGeometry(Geometry geometry);
     Geometry& getGeometry();
     int getLabelsCount();
